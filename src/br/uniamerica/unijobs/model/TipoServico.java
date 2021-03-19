@@ -9,7 +9,6 @@ public class TipoServico {
 	}
 
 	public TipoServico(Integer id, String nome, String descricao) {
-	
 		this.id = id;
 		this.nome = nome;
 		this.descricao = descricao;
@@ -41,6 +40,10 @@ public class TipoServico {
 
 	@Override
 	public String toString() {
-		return "TipoServico [id=" + id + ", nome=" + nome + ", descricao=" + descricao + "]";
+		return "TipoServico{" +
+				"id=" + id +
+				", nome='" + nome + '\'' +
+				", descricao='" + descricao + '\'' +
+				'}';
 	}
 }

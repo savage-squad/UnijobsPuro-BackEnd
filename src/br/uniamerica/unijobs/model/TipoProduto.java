@@ -9,6 +9,12 @@ public class TipoProduto {
 		
 	}
 
+	public TipoProduto(Integer id, String nome, String descricao) {
+		this.id = id;
+		this.nome = nome;
+		this.descricao = descricao;
+	}
+
 	public Integer getId() {
 		return id;
 	}
@@ -35,7 +41,11 @@ public class TipoProduto {
 
 	@Override
 	public String toString() {
-		return "TipoProduto [id=" + id + ", nome=" + nome + ", descricao=" + descricao + "]";
-	};
-	
+		return "TipoProduto{" +
+				"id=" + id +
+				", nome='" + nome + '\'' +
+				", descricao='" + descricao + '\'' +
+				'}';
+	}
+
 }

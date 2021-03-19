@@ -1,17 +1,21 @@
 package br.uniamerica.unijobs.model;
 
-public class Usuario {
+public class Usuario extends Pessoa{
 	private Integer id;
 	private String email;
-	
+	private String senha;
+	private TipoUsuario tipoUsuario;
 
 	public Usuario() {
 		
 	}
 
-	public Usuario(Integer id, String email) {
+	public Usuario(String nome, String celular, int ra, Universidade universidade, Curso curso, Integer id, String email, String senha, TipoUsuario tipoUsuario) {
+		super(nome, celular, ra, universidade, curso);
 		this.id = id;
 		this.email = email;
+		this.senha = senha;
+		this.tipoUsuario = tipoUsuario;
 	}
 
 	public Integer getId() {
@@ -30,9 +34,30 @@ public class Usuario {
 		this.email = email;
 	}
 
+	public String getSenha() {
+		return senha;
+	}
+
+	public void setSenha(String senha) {
+		this.senha = senha;
+	}
+
+	public TipoUsuario getTipoUsuario() {
+		return tipoUsuario;
+	}
+
+	public void setTipoUsuario(TipoUsuario tipoUsuario) {
+		this.tipoUsuario = tipoUsuario;
+	}
+
 	@Override
 	public String toString() {
-		return "Usuario [id=" + id + ", email=" + email + "]";
-	}	
+		return "Usuario{" +
+				"id=" + id +
+				", email='" + email + '\'' +
+				", senha='" + senha + '\'' +
+				", tipoUsuario=" + tipoUsuario +
+				'}';
+	}
 
 }

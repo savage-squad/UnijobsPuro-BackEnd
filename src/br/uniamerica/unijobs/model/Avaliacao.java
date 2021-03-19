@@ -9,7 +9,6 @@ public class Avaliacao {
 	}
 
 	public Avaliacao(Integer id, int nota) {
-		super();
 		this.id = id;
 		this.nota = nota;
 	}
@@ -32,7 +31,9 @@ public class Avaliacao {
 
 	@Override
 	public String toString() {
-		return "Avaliacao [id=" + id + ", nota=" + nota + "]";
+		return "Avaliacao{" +
+				"id=" + id +
+				", nota=" + nota +
+				'}';
 	}
-	
 }
