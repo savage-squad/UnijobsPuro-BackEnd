@@ -1,4 +1,5 @@
 package br.uniamerica.unijobs.controller;
 
-public class AnuncioController {
+public class ServicoController {
+
 }
