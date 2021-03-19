@@ -11,6 +11,13 @@ public class Universidade {
 	public Universidade() {	
 	}
 
+	public Universidade(Integer id, String nome, String cnpj) {
+		this.id = id;
+		this.nome = nome;
+		this.cnpj = cnpj;
+		this.cursos = cursos;
+	}
+
 	public Universidade(Integer id, String nome, String cnpj, ArrayList<Curso> cursos) {
 		this.id = id;
 		this.nome = nome;
