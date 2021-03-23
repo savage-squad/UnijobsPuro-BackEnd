@@ -6,7 +6,7 @@ import java.util.ArrayList;
 
 public class ProdutoController {
 
-    public static Usuario main() {
+    public static Produto main() {
         Curso curso1 = new Curso(1, "Engenharia Software");
         Curso curso2 = new Curso(2, "Direito");
         Curso curso3 = new Curso(3, "Medicina");
@@ -24,6 +24,11 @@ public class ProdutoController {
 
         TipoProduto tipoProduto = new TipoProduto(1, "Gastronomia", "Produtos relacionados a comestiveis");
 
-        return usuario1;
+        ArrayList<Imagem> imagens = new ArrayList();
+        ArrayList<Avaliacao> avaliacoes = new ArrayList();
+
+        Produto produto = new Produto(1, usuario1, "Rocambole", "Sabor coco com chocolate", 20.99,
+                "https://www.google.com/url?sa=i&url=https%3", true, avaliacoes, imagens, 1, tipoProduto);
+        return produto;
     }
 }

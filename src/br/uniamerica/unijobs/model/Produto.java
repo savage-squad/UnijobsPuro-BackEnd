@@ -34,8 +34,14 @@ public class Produto extends Anuncio{
 		return "Produto{" +
 				"id=" + id +
 				", tipoProduto=" + tipoProduto +
+				", titulo=" + getTitulo() +
+				", descricao=" + getDescricao() +
+				", preco=" + getPreco() +
+				", miniatura=" + getMiniatura() +
+				", ativo=" + getAtivo() +
+				", avaliacoes=" + getAvaliacoes() +
+				", imagens=" + getImagens() +
+				", id1=" + getId() +
 				'}';
 	}
-
-
 }
