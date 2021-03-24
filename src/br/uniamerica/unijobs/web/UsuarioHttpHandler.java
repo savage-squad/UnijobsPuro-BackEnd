@@ -1,5 +1,7 @@
 package br.uniamerica.unijobs.web;
 
-public class UsuarioHttpHandler {
+//import com.sun.net.httpserver.HttpHandler;
+
+public class UsuarioHttpHandler  { //implements HttpHandler 
 
 }
