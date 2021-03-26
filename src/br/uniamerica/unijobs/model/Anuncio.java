@@ -16,7 +16,8 @@ public class Anuncio {
 	public Anuncio() {
 	}
 
-	public Anuncio(Integer id, Usuario usuario, String titulo, String descricao, Double preco, String miniatura, Boolean ativo, ArrayList<Avaliacao> avaliacoes, ArrayList<Imagem> imagens) {
+	public Anuncio(Integer id, Usuario usuario, String titulo, String descricao, Double preco, String miniatura,
+				   Boolean ativo, ArrayList<Avaliacao> avaliacoes, ArrayList<Imagem> imagens) {
 		this.id = id;
 		this.usuario = usuario;
 		this.titulo = titulo;
