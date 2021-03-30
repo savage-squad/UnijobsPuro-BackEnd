@@ -19,6 +19,18 @@ public class Application {
 
 	public static void main(String[] args) throws SQLException {
 
+		Connection conn = ConexaoDao.getConnection();
+		Statement stmt = conn.createStatement();
+		ResultSet rs = stmt.executeQuery("SELECT * FROM usuarios");
+
+		while(rs.next()){
+			System.out.println(rs.getInt(1)+"  "+rs.getString(2)+"  "+rs.getString(3));
+		}
+
+		rs.close();
+		stmt.close();
+		conn.close();
+
 //		Curso curso1 = new Curso(1, "Engenharia Software");
 //		Curso curso2 = new Curso(2, "Direito");
 //		Curso curso3 = new Curso(3, "Medicina");
@@ -50,25 +62,6 @@ public class Application {
 //
 //		System.out.println(produto);
 //
-
-		MysqlDataSource dataSource = new MysqlDataSource();
-		dataSource.setUser("unijobs");
-		dataSource.setPassword("unijobs123");
-		dataSource.setServerName("localhost");
-		dataSource.setServerTimezone("UTC");
-		dataSource.setDatabaseName("unijobs");
-
-		Connection conn = dataSource.getConnection();
-		Statement stmt = conn.createStatement();
-		ResultSet rs = stmt.executeQuery("SELECT * FROM usuarios");
-
-		while(rs.next()){
-				System.out.println(rs.getInt(1)+"  "+rs.getString(2)+"  "+rs.getString(3));
-		}
-
-		rs.close();
-		stmt.close();
-		conn.close();
 
 	}
 
