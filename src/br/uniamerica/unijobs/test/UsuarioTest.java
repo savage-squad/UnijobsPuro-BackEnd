@@ -1,16 +1,20 @@
 package br.uniamerica.unijobs.test;
 
-import br.uniamerica.unijobs.dao.ConexaoDao;
 import br.uniamerica.unijobs.dao.UsuarioDao;
+import br.uniamerica.unijobs.model.Usuario;
 
-import java.sql.Connection;
-import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
+import java.util.List;
 
 public class UsuarioTest {
     public static void main(String[] args) throws SQLException {
         UsuarioDao usuarioDao = new UsuarioDao();
-        usuarioDao.findAll();
+        List<Usuario> usuarios = usuarioDao.findAll(); //deve retornar uma lista do tipo  Usuario
+//        Usuario usuario = usuarioDao.findById(1); // deve buscar no banco de dados pelo Id e retornar uma instancia do tipo Usuario
+        for (Usuario user : usuarios){
+            System.out.println(user);
+        }
+
+
     }
 }

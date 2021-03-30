@@ -3,14 +3,14 @@ package br.uniamerica.unijobs.model;
 public abstract class Pessoa {
 	private String nome;
 	private String celular;
-	private int ra;
+	private String ra;
 	private Universidade universidade;
 	private Curso curso;
 		
 	public Pessoa() {
 	}
 
-	public Pessoa(String nome, String celular, int ra, Universidade universidade, Curso curso) {
+	public Pessoa(String nome, String celular, String ra, Universidade universidade, Curso curso) {
 		this.nome = nome;
 		this.celular = celular;
 		this.ra = ra;
@@ -34,11 +34,11 @@ public abstract class Pessoa {
 		this.celular = celular;
 	}
 
-	public int getRa() {
+	public String getRa() {
 		return ra;
 	}
 
-	public void setRa(int ra) {
+	public void setRa(String ra) {
 		this.ra = ra;
 	}
 

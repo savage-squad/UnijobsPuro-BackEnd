@@ -19,7 +19,7 @@ public class UsuarioController {
 
         TipoUsuario tipoUsuario1 = new TipoUsuario(1,"Administrador Geral");
 
-        Usuario usuario1 = new Usuario("Nelson", "888888888", 888888, universidade1, curso1, 1, "teste@gmail.com", "semsenha", tipoUsuario1);
+        Usuario usuario1 = new Usuario("Nelson", "888888888", "888888", universidade1, curso1, 1, "teste@gmail.com", "semsenha", tipoUsuario1);
 
         return usuario1;
     }

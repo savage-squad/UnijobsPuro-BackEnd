@@ -10,7 +10,7 @@ public class Usuario extends Pessoa{
 		
 	}
 
-	public Usuario(String nome, String celular, int ra, Universidade universidade, Curso curso, Integer id, String email, String senha, TipoUsuario tipoUsuario) {
+	public Usuario(String nome, String celular, String ra, Universidade universidade, Curso curso, Integer id, String email, String senha, TipoUsuario tipoUsuario) {
 		super(nome, celular, ra, universidade, curso);
 		this.id = id;
 		this.email = email;
@@ -18,7 +18,13 @@ public class Usuario extends Pessoa{
 		this.tipoUsuario = tipoUsuario;
 	}
 
-	public Integer getId() {
+    public Usuario(int id, String email, String nome, String celular, String ra) {
+		super(nome, celular, ra, null, null);
+		this.email = email;
+		this.id = id;
+    }
+
+    public Integer getId() {
 		return id;
 	}
 
