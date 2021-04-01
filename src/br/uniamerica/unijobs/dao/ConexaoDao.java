@@ -16,8 +16,8 @@ public class ConexaoDao {    // classe ConexaoDao
 		
 		try {
 			MysqlDataSource dataSource = new MysqlDataSource();
-			dataSource.setUser("root");
-			dataSource.setPassword("secret");
+			dataSource.setUser("unijobs");
+			dataSource.setPassword("unijobs123");
 			dataSource.setServerName("localhost");
 			dataSource.setServerTimezone("UTC");
 			dataSource.setDatabaseName("unijobs");
