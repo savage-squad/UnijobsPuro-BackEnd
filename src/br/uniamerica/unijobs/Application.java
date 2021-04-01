@@ -1,25 +1,18 @@
 package br.uniamerica.unijobs;
 
-import br.uniamerica.unijobs.controller.ProdutoController;
-import br.uniamerica.unijobs.dao.ConexaoDao;
-import br.uniamerica.unijobs.model.*;
-import com.mysql.cj.jdbc.MysqlDataSource;
+import br.uniamerica.unijobs.factory.ConnectionFactory;
 
-import javax.naming.Context;
-import javax.naming.InitialContext;
-import javax.sql.DataSource;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.ArrayList;
 
 
 public class Application {
 
 	public static void main(String[] args) throws SQLException {
 
-		Connection conn = ConexaoDao.getConnection();
+		Connection conn = ConnectionFactory.getConnection();
 		Statement stmt = conn.createStatement();
 		ResultSet rs = stmt.executeQuery("SELECT * FROM usuarios");
 

@@ -1,22 +1,21 @@
 package br.uniamerica.unijobs.dao;
 
+import br.uniamerica.unijobs.factory.ConnectionFactory;
 import br.uniamerica.unijobs.model.Usuario;
 
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
 public class UsuarioDao {
 
     //pega conexao do banco de dados por um metodo estatico da classe ConexaoDao
-    private Connection conn = ConexaoDao.getConnection();
+    private Connection conn = ConnectionFactory.getConnection();
 
     public List<Usuario> findAll() throws SQLException {
-        Statement stmt = conn.createStatement();
-        ResultSet rs = stmt.executeQuery("SELECT * FROM usuarios");
+        String sql = "SELECT * FROM usuarios";
+        PreparedStatement stmt = conn.prepareStatement(sql);
+        ResultSet rs = stmt.executeQuery();
 
         // declarando e instanciando uma lista de usuarios
         List<Usuario> usuarios = new ArrayList<>();

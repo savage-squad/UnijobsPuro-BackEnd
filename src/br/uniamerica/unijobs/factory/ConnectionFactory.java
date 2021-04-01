@@ -1,4 +1,4 @@
-package br.uniamerica.unijobs.dao;
+package br.uniamerica.unijobs.factory;
 
 import com.mysql.cj.jdbc.MysqlDataSource;
 
@@ -8,7 +8,7 @@ import java.sql.SQLException;
 
 import javax.swing.JOptionPane;
 
-public class ConexaoDao {    // classe ConexaoDao
+public class ConnectionFactory {    // classe ConexaoDao
 
 
 	public static Connection getConnection() {  // metodo conectaBD
