@@ -1,6 +1,7 @@
 package br.uniamerica.unijobs;
 
 import br.uniamerica.unijobs.controller.ProdutoController;
+import br.uniamerica.unijobs.dao.AnuncioDao;
 import br.uniamerica.unijobs.dao.ConexaoDao;
 import br.uniamerica.unijobs.model.*;
 import com.mysql.cj.jdbc.MysqlDataSource;
@@ -13,6 +14,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Calendar;
 
 
 public class Application {
@@ -52,8 +54,8 @@ public class Application {
 //
 
 		MysqlDataSource dataSource = new MysqlDataSource();
-		dataSource.setUser("unijobs");
-		dataSource.setPassword("unijobs123");
+		dataSource.setUser("root");
+		dataSource.setPassword("nkwnfh31");
 		dataSource.setServerName("localhost");
 		dataSource.setServerTimezone("UTC");
 		dataSource.setDatabaseName("unijobs");
@@ -69,6 +71,20 @@ public class Application {
 		rs.close();
 		stmt.close();
 		conn.close();
+
+		// pronto para gravar
+		Anuncio contato = new Anuncio();
+		contato.setTitulo("Caelum");
+		contato.setDescricao("contato@caelum.com.br");
+		contato.setPreco(12.34);
+
+		// grave nessa conexão!!!
+		AnuncioDao bd = new AnuncioDao();
+
+		// método elegante
+		bd.adiciona(contato);
+
+		System.out.println("Gravado!");
 
 	}
 
