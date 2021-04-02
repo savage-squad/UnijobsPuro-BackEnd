@@ -15,6 +15,11 @@ public class TipoProduto {
 		this.descricao = descricao;
 	}
 
+	public TipoProduto(String nome, String descricao) {
+		this.nome = nome;
+		this.descricao = descricao;
+	}
+
 	public Integer getId() {
 		return id;
 	}

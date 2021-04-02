@@ -10,7 +10,7 @@ import java.util.List;
 public class UsuarioDao {
 
     //pega conexao do banco de dados por um metodo estatico da classe ConexaoDao
-    private Connection conn = ConnectionFactory.getConnection();
+    private Connection conn = new ConnectionFactory().getConnection();
 
     public List<Usuario> findAll() throws SQLException {
         String sql = "SELECT * FROM usuarios";

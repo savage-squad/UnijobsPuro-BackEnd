@@ -8,7 +8,7 @@ import java.sql.SQLException;
 
 import javax.swing.JOptionPane;
 
-public class ConnectionFactory {    // classe ConexaoDao
+public class ConnectionFactory {    // classe Conexao
 
 
 	public static Connection getConnection() {  // metodo conectaBD
@@ -23,7 +23,7 @@ public class ConnectionFactory {    // classe ConexaoDao
 			dataSource.setDatabaseName("unijobs");
 			conexao  = dataSource.getConnection();
 		} catch (SQLException erro) {
-			JOptionPane.showMessageDialog(null, "conexaoDao" + erro.getMessage());
+			JOptionPane.showMessageDialog(null, "conexao" + erro.getMessage());
 			System.out.println("Conexão com o banco Falhou");
 		} finally {
 			return conexao;
