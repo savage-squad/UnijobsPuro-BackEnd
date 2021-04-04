@@ -16,8 +16,8 @@ public class ConnectionFactory {    // classe ConexaoDao
 		
 		try {
 			MysqlDataSource dataSource = new MysqlDataSource();
-			dataSource.setUser("unijobs");
-			dataSource.setPassword("unijobs123");
+			dataSource.setUser("root");
+			dataSource.setPassword("nkwnfh31");
 			dataSource.setServerName("localhost");
 			dataSource.setServerTimezone("UTC");
 			dataSource.setDatabaseName("unijobs");

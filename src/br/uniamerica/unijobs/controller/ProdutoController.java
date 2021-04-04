@@ -28,7 +28,7 @@ public class ProdutoController {
         ArrayList<Avaliacao> avaliacoes = new ArrayList();
 
         Produto produto = new Produto(1, usuario1, "Rocambole", "Sabor coco com chocolate", 20.99,
-                "https://www.google.com/url?sa=i&url=https%3", true, avaliacoes, imagens, 1, tipoProduto);
+                "https://www.google.com/url?sa=i&url=https%3", true, 5, avaliacoes, imagens, 1, tipoProduto);
         return produto;
     }
 }

@@ -10,8 +10,8 @@ public class Servico extends Anuncio{
 	
 	}
 
-	public Servico(Integer id, Usuario usuario, String titulo, String descricao, Double preco, String miniatura, Boolean ativo, ArrayList<Avaliacao> avaliacoes, ArrayList<Imagem> imagens, Integer id1, TipoServico tipoServico) {
-		super(id, usuario, titulo, descricao, preco, miniatura, ativo, avaliacoes, imagens);
+	public Servico(Integer id, Usuario usuario, String titulo, String descricao, Double preco, String miniatura, Boolean ativo, Integer prazo, ArrayList<Avaliacao> avaliacoes, ArrayList<Imagem> imagens, Integer id1, TipoServico tipoServico) {
+		super(id, usuario, titulo, descricao, preco, miniatura, ativo, prazo, avaliacoes, imagens);
 		this.id = id1;
 		this.tipoServico = tipoServico;
 	}
