@@ -10,9 +10,10 @@ public class Produto extends Anuncio{
 		
 	}
 
-	public Produto(Integer id, Usuario usuario, String titulo, String descricao, Double preco, String miniatura, Boolean ativo, ArrayList<Avaliacao> avaliacoes, ArrayList<Imagem> imagens, Integer id1, TipoProduto tipoProduto) {
+	public Produto(Integer id, Usuario usuario, String titulo, String descricao, Double preco, String miniatura,
+				   Boolean ativo, ArrayList<Avaliacao> avaliacoes, ArrayList<Imagem> imagens, Integer id_produto, TipoProduto tipoProduto) {
 		super(id, usuario, titulo, descricao, preco, miniatura, ativo, avaliacoes, imagens);
-		this.id = id1;
+		this.id = id_produto;
 		this.tipoProduto = tipoProduto;
 	}
 

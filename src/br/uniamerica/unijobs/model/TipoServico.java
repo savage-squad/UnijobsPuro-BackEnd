@@ -8,6 +8,11 @@ public class TipoServico {
 	public TipoServico() {
 	}
 
+	public TipoServico(String nome, String descricao) {
+		this.nome = nome;
+		this.descricao = descricao;
+	}
+
 	public TipoServico(Integer id, String nome, String descricao) {
 		this.id = id;
 		this.nome = nome;

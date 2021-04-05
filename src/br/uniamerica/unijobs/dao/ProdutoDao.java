@@ -24,15 +24,12 @@ public class ProdutoDao {
 //
 //        while(rs.next()){
 ////            System.out.println(rs.getInt(1)+"  "+rs.getString(2)+"  "+rs.getString(3));
+//
+////            public Produto(Integer id, Usuario usuario, String titulo, String descricao, Double preco, String miniatura,
+////                    Boolean ativo, ArrayList<Avaliacao> avaliacoes, ArrayList<Imagem> imagens, Integer id1, TipoProduto tipoProduto)
+//
+//            Produto produto = new Produto(rs.getInt(1), );
 //            produtos.add(
-//                    rs.getInt(1),
-//                    rs.getInt(2),
-//                    rs.getInt(3),
-//                    rs.getInt(4),
-//                    rs.getInt(5),
-//                    rs.getInt(6),
-//                    rs.getInt(7),
-//                    rs.getInt(8)
 //            );
 //        }
 //
