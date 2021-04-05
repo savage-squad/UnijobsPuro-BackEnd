@@ -31,7 +31,7 @@ public class ImagemDao {
         }
     }
 
-    public List<Curso> findAll() throws SQLException {
+    public List<Imagem> findAll() throws SQLException {
         String sql = "SELECT * FROM imagens";
         PreparedStatement stmt = conn.prepareStatement(sql);
         ResultSet rs = stmt.executeQuery();
