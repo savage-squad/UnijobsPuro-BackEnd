@@ -18,10 +18,8 @@ public class AnuncioDao {
                 "(titulo, descricao, preco, miniatura, ativo, prazo, id_usuario)" +
                 " values (?,?,?,?,?,?,?)";
         try {
-            // prepared statement para inserção
             PreparedStatement stmt = conn.prepareStatement(sql);
 
-            // seta os valores
             stmt.setString(1,anuncio.getTitulo());
             stmt.setString(2,anuncio.getDescricao());
             stmt.setDouble(3,anuncio.getPreco());
@@ -29,7 +27,7 @@ public class AnuncioDao {
             stmt.setBoolean(5,anuncio.getAtivo());
             stmt.setInt(6,anuncio.getPrazo());
             stmt.setInt(7,anuncio.getUsuario().getId());
-            // executa
+
             stmt.execute();
             stmt.close();
         } catch (SQLException e) {
@@ -55,8 +53,8 @@ public class AnuncioDao {
     }
 
     public void edit(Anuncio anuncio) {
-        String sql = "update anuncios set titulo=?, descricao=?, preco=?, miniatura=?, ativo=?, prazo=?, usuario=?" +
-                "where id_anuncio=?";
+        String sql = "update anuncios set titulo=?, descricao=?, preco=?, miniatura=?, ativo=?, prazo=?, id_usuario=?" +
+                " where id_anuncio=?";
         try {
             PreparedStatement stmt = conn.prepareStatement(sql);
             stmt.setString(1,anuncio.getTitulo());
@@ -66,6 +64,7 @@ public class AnuncioDao {
             stmt.setBoolean(5,anuncio.getAtivo());
             stmt.setInt(6,anuncio.getPrazo());
             stmt.setInt(7,anuncio.getUsuario().getId());
+            stmt.setInt(8,anuncio.getId());
             stmt.execute();
             stmt.close();
         } catch (SQLException e) {
@@ -76,7 +75,7 @@ public class AnuncioDao {
     public void destroy(Anuncio anuncio) {
         try {
             PreparedStatement stmt = conn.prepareStatement("delete " +
-                    "from contatos where id_anuncio=?");
+                    "from anuncios where id_anuncio=?");
             stmt.setInt(1, anuncio.getId());
             stmt.execute();
             stmt.close();

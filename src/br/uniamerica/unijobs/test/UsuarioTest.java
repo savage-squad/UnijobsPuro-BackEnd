@@ -14,7 +14,6 @@ public class UsuarioTest {
         for (Usuario user : usuarios){
             System.out.println(user);
         }
-
-
     }
 }
+
