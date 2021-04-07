@@ -32,17 +32,42 @@ public class TipoProdutoDao {
         return tiposProdutos;
     }
 
+    public TipoProduto find(Integer id){
+        String sql = "SELECT * FROM tipos_produto WHERE id_tipoProduto = ?";
+        try {
+            PreparedStatement stmt = connection.prepareStatement(sql);
+            stmt.setInt(1, id);
+            ResultSet rs = stmt.executeQuery();
+            TipoProduto tipoProduto = new TipoProduto();
+            if(rs.next()){
+                tipoProduto.setId(rs.getInt(1));
+                tipoProduto.setNome(rs.getString(2));
+                tipoProduto.setDescricao(rs.getString(3));
+            }
+            return tipoProduto;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
     public TipoProduto create(TipoProduto tipoProduto){
         String sql = "INSERT INTO tipos_produto (nome, descricao) VALUES (?, ?)";
         try {
-            PreparedStatement stmt = connection.prepareStatement(sql);
+            PreparedStatement stmt = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS); // declara pro statement que ele tem de retornar as chaves auto geradas
 
             stmt.setString(1,tipoProduto.getNome());
             stmt.setString(2,tipoProduto.getDescricao());
 
-            stmt.execute();
-            stmt.close();
+            stmt.executeUpdate();
 
+            ResultSet tipoProdutoGerado = stmt.getGeneratedKeys(); // Pega as chaves auto-geradas
+
+            if(tipoProdutoGerado.next()){
+                Integer idTipoProduto = tipoProdutoGerado.getInt(1); // pega o Int da coluna 1 do ResultSet
+                tipoProduto.setId(idTipoProduto);
+            }
+
+            stmt.close();
             return tipoProduto;
         } catch (SQLException e) {
             throw new RuntimeException(e);
