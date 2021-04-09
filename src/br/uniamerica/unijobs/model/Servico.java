@@ -6,7 +6,7 @@ public class Servico extends Anuncio{
 	private Integer id;
 	private TipoServico tipoServico;
 	
-	public Servico() {
+	public Servico(String string) {
 	
 	}
 
@@ -16,12 +16,22 @@ public class Servico extends Anuncio{
 		this.tipoServico = tipoServico;
 	}
 
+	@Override
 	public Integer getId() {
 		return id;
 	}
 
-	public void setId(Integer id) {
+	@Override
+	public static void setId(Integer id) {
 		this.id = id;
+	}
+
+	public TipoServico getTipoServico() {
+		return tipoServico;
+	}
+
+	public void setTipoServico(TipoServico tipoServico) {
+		this.tipoServico = tipoServico;
 	}
 
 	@Override

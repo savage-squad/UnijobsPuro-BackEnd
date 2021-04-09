@@ -11,8 +11,12 @@ public class UsuarioTest {
         UsuarioDao usuarioDao = new UsuarioDao();
         List<Usuario> usuarios = usuarioDao.findAll(); //deve retornar uma lista do tipo  Usuario
 //        Usuario usuario = usuarioDao.findById(1); // deve buscar no banco de dados pelo Id e retornar uma instancia do tipo Usuario
+
+        // cada usuario da lista usuarios
+        System.out.println("listagem dos usuarios");
         for (Usuario user : usuarios){
             System.out.println(user);
+            System.out.println("listagem dos usuarios");
         }
 
 
