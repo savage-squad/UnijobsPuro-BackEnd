@@ -49,7 +49,7 @@ public class Anuncio {
 		return titulo;
 	}
 
-	public static void setTitulo(String titulo) {
+	public void setTitulo(String titulo) {
 		this.titulo = titulo;
 	}
 
