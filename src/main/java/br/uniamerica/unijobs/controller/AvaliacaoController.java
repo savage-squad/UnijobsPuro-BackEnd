@@ -1,5 +1,5 @@
 package br.uniamerica.unijobs.controller;
 
-public class TipoProdutoController {
+public class AvaliacaoController {
 
 }
