@@ -5,9 +5,9 @@ import java.util.ArrayList;
 public class Servico extends Anuncio{
 	private Integer id;
 	private TipoServico tipoServico;
-	
-	public Servico(String string) {
-	
+
+	public Servico() {
+
 	}
 
 	public Servico(Integer id, Usuario usuario, String titulo, String descricao, Double preco, String miniatura, Boolean ativo, ArrayList<Avaliacao> avaliacoes, ArrayList<Imagem> imagens, Integer id1, TipoServico tipoServico) {
@@ -22,7 +22,7 @@ public class Servico extends Anuncio{
 	}
 
 	@Override
-	public static void setId(Integer id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 

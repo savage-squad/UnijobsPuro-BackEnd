@@ -65,7 +65,7 @@ public class Anuncio {
 		return preco;
 	}
 
-	public static void setPreco(Double preco) {
+	public void setPreco(Double preco) {
 		this.preco = preco;
 	}
 
@@ -73,7 +73,7 @@ public class Anuncio {
 		return miniatura;
 	}
 
-	public static void setMiniatura(String miniatura) {
+	public void setMiniatura(String miniatura) {
 		this.miniatura = miniatura;
 	}
 
@@ -81,7 +81,7 @@ public class Anuncio {
 		return ativo;
 	}
 
-	public static void setAtivo(short ativo) {
+	public void setAtivo(Boolean ativo) {
 		this.ativo = ativo;
 	}
 

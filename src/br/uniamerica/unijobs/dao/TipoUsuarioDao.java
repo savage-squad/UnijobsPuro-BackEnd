@@ -1,4 +1,4 @@
 package br.uniamerica.unijobs.dao;
 
-public class UniversiadadeDao {
+public class TipoUsuarioDao {
 }
