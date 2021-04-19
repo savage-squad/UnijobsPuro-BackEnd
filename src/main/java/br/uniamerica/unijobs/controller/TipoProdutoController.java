@@ -4,12 +4,14 @@ import br.uniamerica.unijobs.dao.TipoProdutoDao;
 import br.uniamerica.unijobs.model.TipoProduto;
 import com.google.gson.Gson;
 
+import javax.annotation.security.PermitAll;
 import javax.ws.rs.*;
 import javax.ws.rs.core.Response;
 import java.sql.SQLException;
 import java.util.List;
 
-@Path("/")
+@PermitAll
+@Path("/tipos_produtos")
 public class TipoProdutoController {
     private List<TipoProduto> tipos_produtos;
     {
@@ -22,14 +24,13 @@ public class TipoProdutoController {
     }
 
     @GET
-    @Path("/tipos_produtos")
     @Produces("application/json")
     public Response tipos_produtos(){
         return Response.ok(new Gson().toJson(tipos_produtos)).build();
     }
 
     @GET
-    @Path("/tipos_produtos/{id}")
+    @Path("/{id}")
     @Produces("application/json")
     public Response show(@PathParam("id") Integer id) {
         TipoProdutoDao tipoProdutoDao = new TipoProdutoDao();
@@ -37,10 +38,31 @@ public class TipoProdutoController {
     }
 
     @POST
-    @Path("/tipos_produtos")
     @Consumes("application/json")
     @Produces("application/json")
     public Response save(TipoProduto tipoProduto){
-        return Response.ok(new Gson().toJson(tipoProduto)).build();
+        TipoProdutoDao tipoProdutodao = new TipoProdutoDao();
+        TipoProduto produto_criado = tipoProdutodao.create(tipoProduto);
+        return Response.ok(new Gson().toJson(produto_criado)).build();
+    }
+
+    @PUT
+    @Path("/{id}")
+    @Consumes("application/json")
+    @Produces("application/json")
+    public Response update(@PathParam("id") Integer id, TipoProduto tipoProduto){
+        TipoProdutoDao tipoProdutodao = new TipoProdutoDao();
+        TipoProduto produto_atualizado = tipoProdutodao.update(tipoProduto);
+        return Response.ok(new Gson().toJson(produto_atualizado)).build();
+    }
+
+    @DELETE
+    @Path("/{id}")
+    @Consumes("application/json")
+    @Produces("application/json")
+    public Response update(@PathParam("id") Integer id){
+        TipoProdutoDao tipoProdutodao = new TipoProdutoDao();
+        String produto_deletado = tipoProdutodao.delete(id);
+        return Response.ok(new Gson().toJson(produto_deletado)).build();
     }
 }

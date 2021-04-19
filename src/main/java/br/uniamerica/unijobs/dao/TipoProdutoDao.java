@@ -74,31 +74,41 @@ public class TipoProdutoDao {
         }
     }
 
-    public void update(TipoProduto tipoProduto){
+    public TipoProduto update(TipoProduto tipoProduto){
         String sql = "UPDATE tipos_produto set nome=?, descricao=? where id_tipoProduto=?";
         try {
-            PreparedStatement stmt = connection.prepareStatement(sql);
+            PreparedStatement stmt = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 
             stmt.setString(1,tipoProduto.getNome());
             stmt.setString(2,tipoProduto.getDescricao());
             stmt.setInt(3,tipoProduto.getId());
 
-            stmt.execute();
+            stmt.executeUpdate();
+
+            ResultSet tipoProdutoGerado = stmt.getGeneratedKeys(); // Pega as chaves auto-geradas
+
+            if(tipoProdutoGerado.next()){
+                Integer idTipoProduto = tipoProdutoGerado.getInt(1); // pega o Int da coluna 1 do ResultSet
+                tipoProduto.setId(idTipoProduto);
+            }
+
             stmt.close();
+            return tipoProduto;
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
     }
 
-    public void delete(TipoProduto tipoProduto){
-        String sql = "DELETE FROM tipos_produtos WHERE id_tipoProduto = ?";
+    public String delete(Integer id){
+        String sql = "DELETE FROM tipos_produto WHERE id_tipoProduto = ?";
         try {
             PreparedStatement stmt = connection.prepareStatement(sql);
 
-            stmt.setInt(1,tipoProduto.getId());
+            stmt.setInt(1, id);
 
             stmt.execute();
             stmt.close();
+            return "Produto: " +id+ "Deletado.";
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
