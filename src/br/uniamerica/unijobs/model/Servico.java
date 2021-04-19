@@ -16,7 +16,7 @@ public class Servico extends Anuncio{
 		this.tipoServico = tipoServico;
 	}
 
-	@Override
+    @Override
 	public Integer getId() {
 		return id;
 	}
