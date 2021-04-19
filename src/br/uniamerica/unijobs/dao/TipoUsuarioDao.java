@@ -1,36 +1,82 @@
 package br.uniamerica.unijobs.dao;
 
 
-import br.uniamerica.unijobs.factory.ConnectionFactory;
 import br.uniamerica.unijobs.model.TipoUsuario;
 
-import javax.swing.*;
-import java.sql.Connection;
+import javax.sql.DataSource;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import java.util.ArrayList;
 
 public class TipoUsuarioDao {
+    private DataSource dataSource;
 
-    public void create(TipoUsuario typeUser) {
-        Connection con = ConnectionFactory.getConnection();
-        PreparedStatement stmt = null;
-
+    public TipoUsuarioDao(DataSource dataSource) {
+        this.dataSource = dataSource;
+    }
+    public ArrayList<TipoUsuario> readAll(){
         try {
-            stmt = con.prepareStatement("INSERT INTO tipos_usuarios (nome) VALUES(?) ");
-            stmt.setString(1, typeUser.getNome());
+            String SQL = "SELECT * FROM tipos_usuarios ";
+            PreparedStatement ps = dataSource.getConnection().prepareStatement(SQL);
+            ResultSet rs = ps.executeQuery();
 
-            stmt.executeUpdate();
+            ArrayList<TipoUsuario> lista = new ArrayList<TipoUsuario>();
 
-            JOptionPane.showMessageDialog(null, "salvo com sucesso");
+            while(rs.next()){
+                TipoUsuario typeUser = new TipoUsuario();
+                typeUser.setId(rs.getInt("id"));
+                typeUser.setNome(rs.getString("nome"));
 
-        } catch (SQLException ex) {
-            Logger.getLogger(TipoUsuarioDao.class.getName()).log(Level.SEVERE, null, ex);
-        }finally {
+                lista.add(typeUser);
+            }
+            ps.close();
+            return lista;
 
         }
+        catch (SQLException ex){
+            System.err.println("Erro ao recuperar" +ex.getMessage());
+        }
+        catch (Exception ex){
+            System.err.println("Erro geral..." +ex.getMessage());
+        }
+        return  null;
+
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//    public void create(TipoUsuario typeUser) {
+//        Connection con = ConnectionFactory.getConnection();
+//        PreparedStatement stmt = null;
+//
+//        try {
+//            stmt = con.prepareStatement("INSERT INTO tipos_usuarios (nome) VALUES(?) ");
+//            stmt.setString(1, typeUser.getNome());
+//
+//            stmt.executeUpdate();
+//
+//            JOptionPane.showMessageDialog(null, "salvo com sucesso");
+//
+//        } catch (SQLException ex) {
+//            Logger.getLogger(TipoUsuarioDao.class.getName()).log(Level.SEVERE, null, ex);
+//        }finally {
+//
+//        }
+//    }
 
 
     }
