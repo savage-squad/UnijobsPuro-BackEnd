@@ -1,6 +1,5 @@
 package br.uniamerica.unijobs.model;
 
-import java.math.BigDecimal;
 import java.util.ArrayList;
 
 public class Anuncio {
@@ -62,11 +61,11 @@ public class Anuncio {
 		this.descricao = descricao;
 	}
 
-	public String getPreco() {
+	public Double getPreco() {
 		return preco;
 	}
 
-	public void setPreco(BigDecimal preco) {
+	public void setPreco(Double preco) {
 		this.preco = preco;
 	}
 
@@ -78,7 +77,7 @@ public class Anuncio {
 		this.miniatura = miniatura;
 	}
 
-	public String getAtivo() {
+	public Boolean getAtivo() {
 		return ativo;
 	}
 

@@ -1,5 +1,6 @@
 package br.uniamerica.unijobs.model;
 
+
 public class TipoUsuario {
 	private Integer id;
 	private String nome;
