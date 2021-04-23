@@ -1,28 +1,35 @@
 package br.uniamerica.unijobs;
 
-import br.uniamerica.unijobs.factory.ConnectionFactory;
-
-import java.sql.Connection;
-import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 
 
 public class Application {
 
 	public static void main(String[] args) throws SQLException {
 
-		Connection conn = ConnectionFactory.getConnection();
-		Statement stmt = conn.createStatement();
-		ResultSet rs = stmt.executeQuery("SELECT * FROM usuarios");
+//		Connection conn = ConnectionFactory.getConnection();
+//		Statement stmt = conn.createStatement();
+//		ResultSet rs = stmt.executeQuery("SELECT * FROM usuarios");
+//
+//		while(rs.next()){
+//			System.out.println(rs.getInt(1)+"  "+rs.getString(2)+"  "+rs.getString(3));
+//		}
+//
+//		rs.close();
+//		stmt.close();
+//		conn.close();
 
-		while(rs.next()){
-			System.out.println(rs.getInt(1)+"  "+rs.getString(2)+"  "+rs.getString(3));
-		}
 
-		rs.close();
-		stmt.close();
-		conn.close();
+
+
+
+
+
+
+
+
+
+
 
 //		Curso curso1 = new Curso(1, "Engenharia Software");
 //		Curso curso2 = new Curso(2, "Direito");
