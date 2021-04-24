@@ -1,0 +1,11 @@
+<component name="ArtifactManager">
+  <artifact type="exploded-ear" name="UnijobsPuro-BackEnd:ear exploded">
+    <output-path>$PROJECT_DIR$/classes/artifacts/UnijobsPuro_BackEnd_ear_exploded</output-path>
+    <root id="root">
+      <element id="javaee-facet-resources" facet="UnijobsPuro-BackEnd/javaeeApplication/javaEEApplication" />
+      <element id="directory" name="web.war">
+        <element id="artifact" artifact-name="UnijobsPuro-BackEnd:war exploded" />
+      </element>
+    </root>
+  </artifact>
+</component>

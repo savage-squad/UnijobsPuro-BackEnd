@@ -65,10 +65,3 @@ public class ConnectionFactory {
 
 }
 
-//        } finally {
-//            return conexao;
-//        }
-
-//  }
-//}
-
