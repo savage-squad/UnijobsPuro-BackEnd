@@ -19,7 +19,7 @@ public class UsuarioDao {
         Statement stmt = conn.createStatement();
         ResultSet rs = stmt.executeQuery("SELECT * FROM usuarios");
 
-       // primeiro cria e instancia uma lista vaazia do tipo Usuario
+        // primeiro cria e instancia uma lista vaazia do tipo Usuario
         List<Usuario> usuarios = new ArrayList<>();
 
 

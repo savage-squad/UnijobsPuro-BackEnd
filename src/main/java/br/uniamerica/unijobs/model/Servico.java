@@ -42,5 +42,4 @@ public class Servico extends Anuncio{
 				'}';
 	}
 
-
 }
