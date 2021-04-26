@@ -38,8 +38,8 @@ public class AnuncioTest {
 //            System.out.println(anuncio);
 //        }
 //
-        anuncioDao.destroy(anuncio1);
-        System.out.println("Deletado!");
+//        anuncioDao.destroy(anuncio1);
+//        System.out.println("Deletado!");
 //
 //        anuncio1.setDescricao("kkkk");
 //        anuncioDao.edit(anuncio1);

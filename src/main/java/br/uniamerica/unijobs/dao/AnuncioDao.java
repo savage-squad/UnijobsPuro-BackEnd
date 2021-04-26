@@ -4,21 +4,19 @@ import br.uniamerica.unijobs.model.Anuncio;
 import br.uniamerica.unijobs.factory.ConnectionFactory;
 import br.uniamerica.unijobs.model.Usuario;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
 public class AnuncioDao {
     private Connection conn = ConnectionFactory.getConnection();
-    public void create(Anuncio anuncio) {
+
+    public Anuncio create(Anuncio anuncio) {
         String sql = "insert into anuncios " +
                 "(titulo, descricao, preco, miniatura, ativo, prazo, id_usuario)" +
                 " values (?,?,?,?,?,?,?)";
         try {
-            PreparedStatement stmt = conn.prepareStatement(sql);
+            PreparedStatement stmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 
             stmt.setString(1,anuncio.getTitulo());
             stmt.setString(2,anuncio.getDescricao());
@@ -27,9 +25,17 @@ public class AnuncioDao {
             stmt.setBoolean(5,anuncio.getAtivo());
             stmt.setInt(6,anuncio.getPrazo());
             stmt.setInt(7,anuncio.getUsuario().getId());
+            stmt.executeUpdate();
 
-            stmt.execute();
+            ResultSet anuncioGerado = stmt.getGeneratedKeys();
+
+            if(anuncioGerado.next()){
+                Integer idAnuncio = anuncioGerado.getInt(1);
+                anuncio.setId(idAnuncio);
+            }
+
             stmt.close();
+            return anuncio;
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
@@ -52,11 +58,22 @@ public class AnuncioDao {
         return anuncios;
     }
 
-    public void edit(Anuncio anuncio) {
+    public Integer findId() throws SQLException {
+        String sql = "SELECT id_anuncio FROM anuncios";
+        PreparedStatement stmt = conn.prepareStatement(sql);
+        ResultSet rs = stmt.executeQuery();
+        Integer id = rs.getInt(1);
+        rs.close();
+        stmt.close();
+        conn.close();
+        return id;
+    }
+
+    public Anuncio edit(Anuncio anuncio) {
         String sql = "update anuncios set titulo=?, descricao=?, preco=?, miniatura=?, ativo=?, prazo=?, id_usuario=?" +
                 " where id_anuncio=?";
         try {
-            PreparedStatement stmt = conn.prepareStatement(sql);
+            PreparedStatement stmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             stmt.setString(1,anuncio.getTitulo());
             stmt.setString(2,anuncio.getDescricao());
             stmt.setDouble(3,anuncio.getPreco());
@@ -65,20 +82,31 @@ public class AnuncioDao {
             stmt.setInt(6,anuncio.getPrazo());
             stmt.setInt(7,anuncio.getUsuario().getId());
             stmt.setInt(8,anuncio.getId());
-            stmt.execute();
+
+            stmt.executeUpdate();
+
+            ResultSet anuncioGerado = stmt.getGeneratedKeys();
+
+            if(anuncioGerado.next()){
+                Integer idAnuncio = anuncioGerado.getInt(1);
+                anuncio.setId(idAnuncio);
+            }
+
             stmt.close();
+            return anuncio;
+
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
     }
 
-    public void destroy(Anuncio anuncio) {
+    public String destroy(Integer id) {
         try {
-            PreparedStatement stmt = conn.prepareStatement("delete " +
-                    "from anuncios where id_anuncio=?");
-            stmt.setInt(1, anuncio.getId());
+            PreparedStatement stmt = conn.prepareStatement("delete from anuncios where id_anuncio=?");
+            stmt.setInt(1, id);
             stmt.execute();
             stmt.close();
+            return "Anuncio: " +id+ "Deletado.";
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }

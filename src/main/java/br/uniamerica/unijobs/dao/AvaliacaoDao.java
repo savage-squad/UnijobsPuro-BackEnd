@@ -1,7 +1,8 @@
 package br.uniamerica.unijobs.dao;
 
+import br.uniamerica.unijobs.model.Anuncio;
 import br.uniamerica.unijobs.factory.ConnectionFactory;
-import br.uniamerica.unijobs.model.Curso;
+import br.uniamerica.unijobs.model.Avaliacao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -10,16 +11,17 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CursoDao {
+public class AvaliacaoDao {
     private Connection conn = ConnectionFactory.getConnection();
 
-    public void create(Curso curso) {
-        String sql = "insert into cursos " +
-                "(nome)" +
-                " values (?)";
+    public void create(Avaliacao avaliacao) {
+        String sql = "insert into avaliacoes " +
+                "(nota, id_anuncio)" +
+                " values (?,?)";
         try {
             PreparedStatement stmt = conn.prepareStatement(sql);
-            stmt.setString(1, curso.getNome());
+            stmt.setInt(1, avaliacao.getNota());
+            stmt.setInt(2, avaliacao.getAnuncio().getId());
             stmt.execute();
             stmt.close();
         } catch (SQLException e) {
@@ -27,26 +29,29 @@ public class CursoDao {
         }
     }
 
-    public List<Curso> findAll() throws SQLException {
-        String sql = "SELECT * FROM cursos";
+    public List<Avaliacao> findAll() throws SQLException {
+        String sql = "SELECT * FROM avaliacoes";
         PreparedStatement stmt = conn.prepareStatement(sql);
         ResultSet rs = stmt.executeQuery();
-        List<Curso> cursos = new ArrayList<>();
+        List<Avaliacao> avaliacoes = new ArrayList<>();
         while (rs.next()) {
-            cursos.add(new Curso(rs.getInt(1),rs.getString(2)));
+            Anuncio anuncio = new Anuncio();
+            avaliacoes.add(new Avaliacao(rs.getInt(1), rs.getInt(2), anuncio));
         }
         rs.close();
         stmt.close();
         conn.close();
-        return cursos;
+        return avaliacoes;
     }
 
-    public void edit(Curso curso) {
-        String sql = "update cursos set nome=?" +
-                "where id_curso=?";
+    public void edit(Avaliacao avaliacao) {
+        String sql = "update avaliacoes set nota=?, id_anuncio=?" +
+                " where id_avaliacao=?";
         try {
             PreparedStatement stmt = conn.prepareStatement(sql);
-            stmt.setString(1, curso.getNome());
+            stmt.setInt(1, avaliacao.getNota());
+            stmt.setInt(2, avaliacao.getAnuncio().getId());
+            stmt.setInt(3, avaliacao.getId());
             stmt.execute();
             stmt.close();
         } catch (SQLException e) {
@@ -54,11 +59,11 @@ public class CursoDao {
         }
     }
 
-    public void destroy(Curso curso) {
+    public void destroy(Avaliacao avaliacao) {
         try {
             PreparedStatement stmt = conn.prepareStatement("delete " +
-                    "from cursos where id_curso=?");
-            stmt.setInt(1, curso.getId());
+                    "from avaliacoes where id_avaliacao=?");
+            stmt.setInt(1, avaliacao.getId());
             stmt.execute();
             stmt.close();
         } catch (SQLException e) {
