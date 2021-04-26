@@ -5,8 +5,8 @@ import br.uniamerica.unijobs.controller.ServicoController;
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
 
-import javax.json.JsonObject;
 import java.io.IOException;
+import java.io.OutputStream;
 
 public class ServicoHttpHandler implements HttpHandler {
 
@@ -14,16 +14,16 @@ public class ServicoHttpHandler implements HttpHandler {
     public void handle(HttpExchange exchange) throws IOException {
         HttpExchange httpExchange = null;
         switch (httpExchange.getRequestMethod()) {
-            case "GET" :
+            case "GET":
                 handleGetRequest(httpExchange);
                 break;
-            case "POST" :
+            case "POST":
                 handlePostRequest(httpExchange);
                 break;
-            case "DELETE" :
+            case "DELETE":
                 handleDeleteRequest(httpExchange);
                 break;
-            case "PUT" :
+            case "PUT":
                 handlePutRequest(httpExchange);
                 break;
         }
@@ -35,10 +35,13 @@ public class ServicoHttpHandler implements HttpHandler {
 
     private void handlePutRequest(HttpExchange httpExchange) {
         ServicoController controller = new ServicoController();
+
         String request_uri = httpExchange.getRequestURI().toString();
+        OutputStream outStream = httpExchange.getResponseBody();
+
 
         int id = 0;
-        JsonObject json;
+
 
     }
 

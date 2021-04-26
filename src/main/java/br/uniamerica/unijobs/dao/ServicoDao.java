@@ -31,6 +31,7 @@ public class ServicoDao {
 
             while (rs.next()) {
                 Servico Servico = new Servico();
+                Servico.setId(rs.getInt("id"));
                 Servico.setTitulo(rs.getString("titulo"));
                 Servico.setDescricao(rs.getString("descricao"));
                 Servico.setPreco(rs.getDouble("preco"));
@@ -58,6 +59,7 @@ public class ServicoDao {
 
             while (rs.next()) {
                 Servico Servico = new Servico();
+                Servico.setId(rs.getInt(rs.getInt("id")));
                 Servico.setTitulo(rs.getString("titulo"));
                 Servico.setDescricao(rs.getNString("descricao"));
                 Servico.setPreco(rs.getDouble("preco"));
@@ -72,19 +74,20 @@ public class ServicoDao {
             ConnectionFactory.closeconnection(conexao,stmt, rs);
         }
         return Servicos;
-}
-//metodo que cadastra o servico
-public boolean adicionar(String titulo, String descricao, Double preco, String miniatura, Boolean ativo) throws Exception {
+    }
+    //metodo que cadastra o servico
+    public boolean adicionar(Integer id, String titulo, String descricao, Double preco, String miniatura, Boolean ativo) throws Exception {
         String sql = "INSERT INT servicos (titulo, descricao, preco, miniatura, ativo) Values (?, ?, ?,?,?,?)";
         PreparedStatement stmt = null;
 
         try {
             stmt = conexao.prepareStatement(sql);
-            stmt.setString(1, descricao);
-            stmt.setString(2,descricao);
-            stmt.setDouble(3,preco);
-            stmt.setString(4, miniatura);
-            stmt.setBoolean(5, ativo);
+
+            stmt.setString(2, descricao);
+            stmt.setString(3,descricao);
+            stmt.setDouble(4,preco);
+            stmt.setString(5, miniatura);
+            stmt.setBoolean(6, ativo);
             stmt.executeUpdate();
             return true;
         } catch (SQLException ex) {
@@ -110,4 +113,3 @@ public boolean adicionar(String titulo, String descricao, Double preco, String m
         }
     }
 }
-

@@ -81,5 +81,8 @@
     <orderEntry type="library" name="Spring Security-5.2.1" level="project" />
     <orderEntry type="library" name="Hibernate 5.4.11-5.4.11" level="project" />
     <orderEntry type="library" name="JAX-RS-2.1.1" level="project" />
+    <orderEntry type="library" name="javax.json.bind-api-1.0" level="project" />
+    <orderEntry type="library" name="javax.json.processing-1.1.4 (2)" level="project" />
+    <orderEntry type="library" name="Validation API-2.0.1.Final" level="project" />
   </component>
 </module>

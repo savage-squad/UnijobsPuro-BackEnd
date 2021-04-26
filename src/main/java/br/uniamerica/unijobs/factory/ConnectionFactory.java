@@ -2,7 +2,6 @@ package br.uniamerica.unijobs.factory;
 
 import com.mysql.cj.jdbc.MysqlDataSource;
 
-import javax.swing.*;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -30,7 +29,6 @@ public class ConnectionFactory {
             dataSource.setDatabaseName("unijobs");
             conexao = dataSource.getConnection();
         } catch (SQLException erro) {
-            JOptionPane.showMessageDialog(null, "conexao" + erro.getMessage());
             System.out.println("Conexão com o banco Falhou");
         }
         return conexao;
