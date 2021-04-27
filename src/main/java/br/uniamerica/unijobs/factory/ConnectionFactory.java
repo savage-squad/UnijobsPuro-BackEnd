@@ -2,9 +2,8 @@ package br.uniamerica.unijobs.factory;
 
 import com.mysql.cj.jdbc.MysqlDataSource;
 
+import javax.swing.*;
 import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class ConnectionFactory {
@@ -19,7 +18,6 @@ public class ConnectionFactory {
         Connection conexao = null;
 
         // Nesse metodo foi declarado uma variavel conexao
-
         try {
             MysqlDataSource dataSource = new MysqlDataSource();
             dataSource.setUser("root");
@@ -29,36 +27,12 @@ public class ConnectionFactory {
             dataSource.setDatabaseName("unijobs");
             conexao = dataSource.getConnection();
         } catch (SQLException erro) {
+            JOptionPane.showMessageDialog(null, "conexao" + erro.getMessage());
             System.out.println("Conexão com o banco Falhou");
+        } finally {
+            return conexao;
         }
-        return conexao;
-    }
-    public static void closeconnection(Connection conexao){
-        try {
-            if (conexao !=null) conexao.close();
-        } catch (SQLException ex) {
-            System.err.println("erro" +ex);
-        }
-    }
-    public static void closeconnection(Connection conexao, PreparedStatement stnt){
-        try {
-            if (stnt !=null){
-                stnt.close();
-            }
-        } catch (SQLException ex) {
-            System.err.println("erro" + ex);
-        }
-        closeconnection(conexao);
-    }
-    public static void closeconnection(Connection conexao, PreparedStatement stnt, ResultSet rs) {
-        try {
-            if (rs !=null) {
-                rs.close();
-            }
-        } catch (SQLException ex) {
-            System.err.println("erro" + ex);
-        }
-        closeconnection(conexao,stnt);
+
     }
 
 }

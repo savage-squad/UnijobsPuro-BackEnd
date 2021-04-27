@@ -3,113 +3,125 @@ package br.uniamerica.unijobs.dao;
 import br.uniamerica.unijobs.factory.ConnectionFactory;
 import br.uniamerica.unijobs.model.Servico;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 public class ServicoDao {
-    private Connection conexao = null;
+    //pega conexao do banco de dados por um metodo estatico da classe ConnectionFactory
+
+    private static Connection connection;
 
     public ServicoDao() {
-        conexao = ConnectionFactory.getConnection();
+        this.connection = ConnectionFactory.getConnection();
     }
-    //metodo para visualizar servico no inicio
 
-    public List<Servico> visualizar() {
-        Connection conexao = ConnectionFactory.getConnection();
-        PreparedStatement stmt = null;
-        ResultSet rs = null;
+    public List<Servico> findAll() throws SQLException {
+        String sql = "SELECT * FROM servicos";
+        PreparedStatement stmt = connection.prepareStatement(sql);
+        ResultSet rs = stmt.executeQuery();
+
+
+        // declarando e instanciando uma lista de servicos
         List<Servico> servicos = new ArrayList<>();
-        try {
-            stmt = conexao.prepareStatement ("SELECT  * FROM servicos");
-            rs = stmt.executeQuery();
 
-            while (rs.next()) {
-                Servico Servico = new Servico();
-                Servico.setId(rs.getInt("id"));
-                Servico.setTitulo(rs.getString("titulo"));
-                Servico.setDescricao(rs.getString("descricao"));
-                Servico.setPreco(rs.getDouble("preco"));
-                Servico.setMiniatura(rs.getString("miniatura"));
-                Servico.setAtivo(rs.getBoolean("ativo"));
-                servicos.add(Servico);
-            }
-        } catch (SQLException ex) {
-            Logger.getLogger(ServicoDao.class.getName()).log(Level.SEVERE, null, ex);
-        } finally {
-            ConnectionFactory.closeconnection(conexao, stmt, rs);
+        while (rs.next()) {
+            servicos.add(new Servico(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getDouble(4), rs.getDouble(5), rs.getBoolean(6)));
         }
+        rs.close();
+        stmt.close();
         return servicos;
     }
-    //metodo que procura os servicos
-    public List<Servico> procurar(String servico){
-        Connection conexao = ConnectionFactory.getConnection();
-        PreparedStatement stmt = null;
-        ResultSet rs = null;
-        List<Servico> Servicos = new ArrayList<>();
-        try {
-            stmt = conexao.prepareStatement("SELECT * servicos WHERE id=?");
-            stmt.setString(1, servico);
-            rs = stmt.executeQuery();
 
-            while (rs.next()) {
-                Servico Servico = new Servico();
-                Servico.setId(rs.getInt(rs.getInt("id")));
-                Servico.setTitulo(rs.getString("titulo"));
-                Servico.setDescricao(rs.getNString("descricao"));
-                Servico.setPreco(rs.getDouble("preco"));
-                Servico.setMiniatura(rs.getString("miniatura"));
-                Servico.setAtivo(rs.getBoolean("ativo"));
-                Servicos.add(Servico);
+    public static Servico find(Integer id) {
+        String sql = "SELECT * FROM servicos WHERE id_servico =?";
+        try {
+            PreparedStatement stmt = connection.prepareStatement(sql);
+            stmt.setInt(1, id);
+            ResultSet rs = stmt.executeQuery();
+            Servico servico = new Servico();
+            if (rs.next()) {
+                servico.setId(rs.getInt(1));
+                servico.setTitulo(rs.getString(2));
+                servico.setDescricao(rs.getString(3));
+                servico.setPreco(rs.getDouble(4));
+                servico.setMiniatura(rs.getString(5));
+                servico.setAtivo(rs.getBoolean(6));
+            }
+            return servico;
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public Servico create(Servico servico) {
+        String sql = "INSERT INTO servicos (titulo, descricao, preco,miniatura,ativo) VALUES (?, ?, ?, ?, ?";
+        try {
+            PreparedStatement stmt = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);// declara para statement que ele tem de retornar as chaves auto geradas
+
+            stmt.setString(1, servico.getTitulo());
+            stmt.setString(2, servico.getDescricao());
+            stmt.setDouble(3, servico.getPreco());
+            stmt.setString(4, servico.getMiniatura());
+            stmt.setBoolean(5, servico.getAtivo());
+            stmt.executeUpdate();
+            ResultSet servicoGerado = stmt.getGeneratedKeys(); // Pega as chaves auto-geradas
+            if (servicoGerado.next()) {
+                Integer id_servico = servicoGerado.getInt(1); // pega o Int da coluna 1 do ResultSet
+                servico.setId(id_servico);
+            }
+            stmt.close();
+            return servico;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+    }
+
+    public Servico update(Servico servico) {
+        String sql = "UPDATE servicos set titulo=?, descricao=?, preco=?, miniatura=?, ativo=? WHERE id_servico";
+        try {
+            try (PreparedStatement stmt = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
+
+                stmt.setString(1, servico.getTitulo());
+                stmt.setString(2, servico.getDescricao());
+                stmt.setDouble(3, servico.getPreco());
+                stmt.setString(4, servico.getMiniatura());
+                stmt.setBoolean(5, servico.getAtivo());
+                stmt.setInt(6, servico.getId());
+
+                stmt.executeUpdate();
+
+                ResultSet servicoGerado = stmt.getGeneratedKeys();
+
+                if (servicoGerado.next()) {
+                    Integer id_servico = servicoGerado.getInt(1);
+                    servico.setId(id_servico);
+                }
+                stmt.close();
+                return servico;
             }
 
-        } catch (SQLException ex) {
-            Logger.getLogger(ServicoDao.class.getName()).log(Level.SEVERE, null, ex);
-        }finally {
-            ConnectionFactory.closeconnection(conexao,stmt, rs);
-        }
-        return Servicos;
-    }
-    //metodo que cadastra o servico
-    public boolean adicionar(Integer id, String titulo, String descricao, Double preco, String miniatura, Boolean ativo) throws Exception {
-        String sql = "INSERT INT servicos (titulo, descricao, preco, miniatura, ativo) Values (?, ?, ?,?,?,?)";
-        PreparedStatement stmt = null;
-
-        try {
-            stmt = conexao.prepareStatement(sql);
-
-            stmt.setString(2, descricao);
-            stmt.setString(3,descricao);
-            stmt.setDouble(4,preco);
-            stmt.setString(5, miniatura);
-            stmt.setBoolean(6, ativo);
-            stmt.executeUpdate();
-            return true;
-        } catch (SQLException ex) {
-            System.err.println("erro" +ex);
-            return false;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
         }
     }
-    //metodo para apagar servico
-    public boolean apagar(Servico servico) {
-        String sql = "DELETE FROM servicos WHERE titulo=?";
-        PreparedStatement stmt = null;
-        try {
-            stmt = conexao.prepareStatement(sql);
-            stmt.setString(1, servico.getTitulo());
-            stmt.executeUpdate();
-            return  true;
 
-        } catch (SQLException ex) {
-            System.err.print("Erro" +ex);
-            return false;
-        } finally {
-            ConnectionFactory.closeconnection(conexao, stmt);
+    public String delete(Integer id) {
+        String sql = "DELETE FROM servicos WHERE id_servico = ?";
+        try {
+            PreparedStatement stmt = connection.prepareStatement(sql);
+
+            stmt.setInt(1, id);
+
+            stmt.execute();
+            stmt.close();
+
+            return "Servico: " + id + "Removido com sucesso! ";
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
         }
     }
 }
