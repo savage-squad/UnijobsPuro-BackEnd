@@ -9,24 +9,12 @@ import java.util.List;
 public class TipoProdutoTest {
     public static void main(String[] args) throws SQLException {
         TipoProdutoDao tipoProdutoDao = new TipoProdutoDao();
+        List<TipoProduto> tiposProdutos = tipoProdutoDao.findAll(); //deve retornar uma lista
 
-        TipoProduto gastronomia = new TipoProduto("Gastronomia", "produtos relacionados a culinaria e gastronomia");
-        gastronomia = tipoProdutoDao.create(gastronomia);
+        for (TipoProduto tipoProduto : tiposProdutos){
+            System.out.println(tipoProduto);
+        }
 
-
-        System.out.println(gastronomia.toString());
-
-//        TipoProduto roupas = tipoProdutoDao.find(2);
-//        System.out.println(roupas);
-//        gastronomia.setDescricao("só uns lanches na vdd");
-//
-//        tipoProdutoDao.update(gastronomia);
-//
-//        List<TipoProduto> tiposProdutos = tipoProdutoDao.findAll(); //deve retornar uma lista
-//
-//        for (TipoProduto tipoProduto : tiposProdutos){
-//            System.out.println(tipoProduto);
-//        }
 
     }
 }
