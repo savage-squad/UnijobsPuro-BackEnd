@@ -60,7 +60,7 @@ public class TipoProdutoController {
     @Path("/{id}")
     @Consumes("application/json")
     @Produces("application/json")
-    public Response update(@PathParam("id") Integer id){
+    public Response delete(@PathParam("id") Integer id){
         TipoProdutoDao tipoProdutodao = new TipoProdutoDao();
         String produto_deletado = tipoProdutodao.delete(id);
         return Response.ok(new Gson().toJson(produto_deletado)).build();

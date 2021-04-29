@@ -1,6 +1,7 @@
 package br.uniamerica.unijobs.dao;
 
 import br.uniamerica.unijobs.factory.ConnectionFactory;
+import br.uniamerica.unijobs.model.TipoProduto;
 import br.uniamerica.unijobs.model.TipoServico;
 
 import java.sql.Connection;
@@ -33,6 +34,24 @@ public class TipoServicoDao {
         rs.close();
         stmt.close();
         return tiposServicos;
+    }
+
+    public TipoServico find(Integer id){
+        String sql = "SELECT * FROM tipos_servicos WHERE id_tipoServico = ?";
+        try {
+            PreparedStatement stmt = connection.prepareStatement(sql);
+            stmt.setInt(1, id);
+            ResultSet rs = stmt.executeQuery();
+            TipoServico tipoServico = new TipoServico();
+            if(rs.next()){
+                tipoServico.setId(rs.getInt(1));
+                tipoServico.setNome(rs.getString(2));
+                tipoServico.setDescricao(rs.getString(3));
+            }
+            return tipoServico;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     public TipoServico create(TipoServico tipoServico){

@@ -74,30 +74,40 @@ public class UsuarioDao {
         }
     }
 
-    public void update(Usuario usuario){
+    public Usuario update(Usuario usuario){
         String sql = "UPDATE usuarios set nome=? where id_usuario=?";
         try {
-            PreparedStatement stmt = connection.prepareStatement(sql);
+            PreparedStatement stmt = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 
             stmt.setString(1,usuario.getNome());
             stmt.setInt(2,usuario.getId());
 
-            stmt.execute();
+            stmt.executeUpdate();
+
+            ResultSet usuarioGerado = stmt.getGeneratedKeys();
+
+            if(usuarioGerado.next()){
+                Integer idUsuario = usuarioGerado.getInt(1);
+                usuario.setId(idUsuario);
+            }
+
             stmt.close();
+            return usuario;
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
     }
 
-    public void delete(Usuario usuario){
+    public String delete(Integer id){
         String sql = "DELETE FROM usuarios WHERE id_usuario = ?";
         try {
             PreparedStatement stmt = connection.prepareStatement(sql);
 
-            stmt.setInt(1,usuario.getId());
+            stmt.setInt(1, id);
 
             stmt.execute();
             stmt.close();
+            return "Usuario: " +id+ "Deletado.";
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
