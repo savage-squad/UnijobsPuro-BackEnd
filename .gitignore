@@ -24,6 +24,9 @@
 *.tar.gz
 *.rar
 .idea
+.idea/
+target/
+classes/
 target
 classes
 .settings
